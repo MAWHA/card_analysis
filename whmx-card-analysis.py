@@ -3,6 +3,31 @@ import qrcode
 import time
 from colorama import init,Fore,Back,Style
 
+from colorama import  init,Fore,Back,Style
+init(autoreset=True)
+class Colored(object):
+    '''
+    设置控制台字体颜色
+    '''
+    #  前景色:红色  背景色:默认
+    def red(self, s):
+        return Fore.RED + s + Fore.RESET
+
+    #  前景色:绿色  背景色:默认
+    def green(self, s):
+        return Fore.GREEN + s + Fore.RESET
+
+    #  前景色:黄色  背景色:默认
+    def yellow(self, s):
+        return Fore.YELLOW + s + Fore.RESET
+
+    #  前景色:蓝色  背景色:默认
+    def blue(self, s):
+        return Fore.BLUE + s + Fore.RESET
+
+
+color = Colored()
+
 
 class get_userinfo():
     '''
@@ -93,14 +118,14 @@ class card_analysis():
                     youyi += 1
                 elif rare == 2:
                     xinsheng += 1
-        print("\033[32m抽卡总数:{}\033[0m".format(techu+youyi+xinsheng))
-        print("\033[32m出红概率:{:.2f}%\033[0m".format(float(techu/(techu+youyi+xinsheng))*100))
+        print(color.green("抽卡总数:{}".format(techu+youyi+xinsheng)))
+        print(color.green("出红概率:{:.2f}%".format(float(techu/(techu+youyi+xinsheng))*100)))
 
-        print(f"\033[31m特出器者:{techu}\033[0m",end=" ")
+        print(color.red(f"特出器者:{techu}"),end=" ")
         for i in CardName_list:
-            print(f"\033[31m{i}\033[0m",end=" ")
-        print(f"\033[33m\n优异器者:{youyi}\033[0m")
-        print(f"\033[34m新生器者:{xinsheng}\033[0m")
+            print(color.red(f"\n{i}"),end=" ")
+        print(color.yellow(f"优异器者:{youyi}"))
+        print(color.blue(f"新生器者:{xinsheng}"))
 
     def all_card_info(self,card_info_list):
         '''
@@ -137,11 +162,11 @@ if __name__ == '__main__':
                     card_name = i.get('CardName')
                     rare = i.get('Rare')
                     if rare == 4:
-                        print(f"\033[31m卡池:{pool_name},器者:{card_name},稀有度:{rare}\033[0m")
+                        print(color.red(f"卡池:{pool_name},器者:{card_name},稀有度:{rare}"))
                     elif rare == 3:
-                        print(f"\033[33m卡池:{pool_name},器者:{card_name},稀有度:{rare}\033[0m")
+                        print(color.yellow(f"卡池:{pool_name},器者:{card_name},稀有度:{rare}"))
                     elif rare == 2:
-                        print(f"\033[34m卡池:{pool_name},器者:{card_name},稀有度:{rare}\033[0m")
+                        print(color.blue(f"卡池:{pool_name},器者:{card_name},稀有度:{rare}"))
         elif user_input =='s':
             with open('card_info.txt','w',encoding='utf-8') as f:
                 f.write("查询时间:{}".format(time.strftime('%Y-%m-%d %H:%M:%S'),end='\n'))
