@@ -123,8 +123,8 @@ class card_analysis():
 
         print(color.red(f"特出器者:{techu}"),end=" ")
         for i in CardName_list:
-            print(color.red(f"\n{i}"),end=" ")
-        print(color.yellow(f"优异器者:{youyi}"))
+            print(color.red(f"{i}"),end=" ")
+        print(color.yellow(f"\n优异器者:{youyi}"))
         print(color.blue(f"新生器者:{xinsheng}"))
 
     def all_card_info(self,card_info_list):
@@ -169,7 +169,7 @@ if __name__ == '__main__':
                         print(color.blue(f"卡池:{pool_name},器者:{card_name},稀有度:{rare}"))
         elif user_input =='s':
             with open('card_info.txt','w',encoding='utf-8') as f:
-                f.write("查询时间:{}".format(time.strftime('%Y-%m-%d %H:%M:%S'),end='\n'))
+                f.write("查询时间:{}\n".format(time.strftime('%Y-%m-%d %H:%M:%S')))
                 card_data = card_analysis.all_card_info(card_info_list)
                 for card_info in card_data:
                     f.write(str(card_info))
